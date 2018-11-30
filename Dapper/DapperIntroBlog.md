@@ -245,11 +245,11 @@ OUTPUT(StarWars, NAMED('starWars'));
 //Fill blank species with unknown
 //Create a BMI for each character
 fillblankHomeAndBMI := 
-		PROJECT(StarWars, 
-									TRANSFORM({RECORDOF(LEFT); REAL BMI;},
-																			SELF.BMI := LEFT.mass / LEFT.Height^2;
-																			SELF.species := IF(LEFT.species = '', 'Unkn.', LEFT.species);
-																			SELF := LEFT;));
+  PROJECT(StarWars, 
+    TRANSFORM({RECORDOF(LEFT); REAL BMI;},
+               SELF.BMI := LEFT.mass / LEFT.Height^2;
+	       SELF.species := IF(LEFT.species = '', 'Unkn.', LEFT.species);
+	       SELF := LEFT;));
 OUTPUT(fillblankHomeAndBMI, NAMED('fillblankHomeAndBMI'));
 
 
@@ -261,8 +261,8 @@ OUTPUT(sortedBMI, NAMED('sortedBMI'));
 
 //How many of each species are there?
 CountRec := RECORD
-		STRING Species := sortedBMI.species;
-		INTEGER n := COUNT(GROUP);
+  STRING Species := sortedBMI.species;
+  INTEGER n := COUNT(GROUP);
 END;
 
 species := TABLE(sortedBMI, CountRec, species);
