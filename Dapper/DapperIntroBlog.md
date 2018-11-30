@@ -127,9 +127,9 @@ tt.head(sortedspecies);
 
 //Finally let's look at unique hair/eye colour combinations:
 colourData := tt.select(StarWars, 'hair_color, eye_color'); 
-unqiueColours := tt.distinct(colourData, 'hair_color, eye_color'); //see arrangedistinct() for fancy sort/dedup operations. 
-tt.head(unqiueColours);
-tt.countn(unqiueColours);
+uniqueColours := tt.distinct(colourData, 'hair_color, eye_color'); //see arrangedistinct() for fancy sort/dedup operations. 
+tt.head(uniqueColours);
+tt.nrows(uniqueColours);
 
 
 //and save our results
@@ -200,7 +200,7 @@ even hand multiple columns to it and it'll handle them all perfectly.
 colourData := tt.select(StarWars, 'hair_color, eye_color'); 
 uniqueColours := tt.distinct(colourData, 'hair_color, eye_color'); 
 tt.head(uniqueColours);
-tt.countn(uniqueColours);
+tt.nrows(uniqueColours);
 ```
 
 `select` (and it's partner function `drop`) will help in quickly sub-setting data, note too the use of distinct which is 
@@ -273,9 +273,9 @@ OUTPUT(sortedspecies, NAMED('sortedspecies'));
 
 //Finally let's look at unique hair/eye colour combinations:
 colourData := TABLE(sortedBMI, {hair_color, eye_color});
-unqiueColours := DEDUP(SORT(DISTRIBUTE(colourData, HASH(hair_color)), hair_color, eye_color, LOCAL), hair_color, eye_color, LOCAL);
-OUTPUT(COUNT(unqiueColours), NAMED('COUNTunqiueColours'));
-OUTPUT(unqiueColours, NAMED('unqiueColours'));
+uniqueColours := DEDUP(SORT(DISTRIBUTE(colourData, HASH(hair_color)), hair_color, eye_color, LOCAL), hair_color, eye_color, LOCAL);
+OUTPUT(COUNT(uniqueColours), NAMED('COUNTuniqueColours'));
+OUTPUT(uniqueColours, NAMED('uniqueColours'));
 
 
 //and save our results
